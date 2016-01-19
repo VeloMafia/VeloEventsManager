@@ -28,16 +28,19 @@ Teamwork project for Telerik Academy
 
 - Event
     - name
+	- description
     - start date
     - end date
     - eventDays
     - users
     - total distance
+	- price
 
 - EventDay
     - date
-    - start time
-    - end time
+	- description
+    - start time and point
+    - end time and point
     - route
     - users
     - routes (could be more than one options - easy option, expert option)
@@ -69,12 +72,13 @@ Teamwork project for Telerik Academy
     - have all the rights of regular users
     - create, edit, delete and view all events
     - add events routes
-    - add events users
+	- can approve/deny users to events
     - can add values to enumerations - example new language, new equipment or skill item
 
 - Regular Users
     - can add proposal routes to events
     - can create, edit, delete and view all their routes
+	- can make a request to join in the event
     - add proposal routes to events
     - view all events they are part of and all public
     - view all users for event
