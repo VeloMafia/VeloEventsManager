@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using VeloEventsManager.Models;
+using VeloEventsManager.Data;
 
 namespace VeloEventsManager.Account
 {

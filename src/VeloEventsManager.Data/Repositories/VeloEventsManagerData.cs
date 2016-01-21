@@ -2,9 +2,9 @@
 {
 	using System;
 	using System.Collections.Generic;
-	using VeloEventsManager.Models;
 	using System.Data.Entity;
-	using System.Linq;
+
+	using VeloEventsManager.Models;
 
 	public class VeloEventsManagerData : IVeloEventsManagerData
 	{

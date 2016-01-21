@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
 using VeloEventsManager.Models;
+using VeloEventsManager.Data;
 
 namespace VeloEventsManager.Account
 {
