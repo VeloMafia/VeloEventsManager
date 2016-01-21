@@ -15,6 +15,8 @@
 		public User()
 		{
 			this.events = new HashSet<Event>();
+			this.Languages = new List<string>();
+			this.Skills = new List<string>();
 		}
 
 		public int BikeId { get; set; }
