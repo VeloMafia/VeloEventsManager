@@ -2,6 +2,7 @@
 {
 	using System.Data.Entity;
 	using System.Data.Entity.Infrastructure;
+
 	using VeloEventsManager.Models;
 
 	public interface IVeloEventsManagerDbContext

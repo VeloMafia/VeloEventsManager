@@ -1,15 +1,19 @@
 ﻿namespace VeloEventsManager.Data
 {
-	using Microsoft.AspNet.Identity.EntityFramework;
+	using System;
+	using System.Web;
 	using System.Data.Entity;
 	using System.Data.Entity.ModelConfiguration.Conventions;
+
+	using Microsoft.AspNet.Identity.EntityFramework;
+
 	using VeloEventsManager.Models;
 
 	public class VeloEventsManagerDbContext : IdentityDbContext<User>, IVeloEventsManagerDbContext
 	{
 		public VeloEventsManagerDbContext()
-            : base("VeloEventsManager", throwIfV1Schema: false)
-        {
+			: base("VeloEventsManager", throwIfV1Schema: false)
+		{
 		}
 
 		public virtual IDbSet<Event> Events { get; set; }
@@ -45,13 +49,9 @@
 			base.OnModelCreating(modelBuilder);
 		}
 	}
-}
 
-#region Helpers
-namespace VeloEventsManager
-{
-	using System;
-	using System.Web;
+
+	#region Helpers
 
 	public static class IdentityHelper
 	{
@@ -105,5 +105,7 @@ namespace VeloEventsManager
 			}
 		}
 	}
+
+	#endregion
 }
-#endregion
+
