@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Events\Details.aspx" />
     <Content Include="packages.config" />
     <None Include="Site.Master" />
     <None Include="Web.Debug.config">
@@ -157,6 +158,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Events\Details.aspx.cs">
+      <DependentUpon>Details.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Events\Details.aspx.designer.cs">
+      <DependentUpon>Details.aspx</DependentUpon>
     </Compile>
     <Compile Include="Identity\ApplicationSignInManager.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
