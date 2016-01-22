@@ -20,5 +20,30 @@ namespace VeloEventsManager.Web
         {
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
+
+        protected void NavigationMenu_MenuItemDataBound(object sender, MenuEventArgs e)
+        {
+            if (ShouldRemoveItem(e.Item.Text))
+            {
+                e.Item.Parent.ChildItems.Remove(e.Item);
+            }
+        }
+
+        private bool ShouldRemoveItem(string menuText)
+        {
+            var isAuthenticated = Context.User.Identity.IsAuthenticated;
+
+            if (menuText == "Users" && !isAuthenticated)
+            {
+                return true;
+            }
+
+            if (menuText == "My events" && !isAuthenticated)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
