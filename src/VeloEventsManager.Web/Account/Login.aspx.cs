@@ -4,7 +4,8 @@ using System.Web.UI;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
-using VeloEventsManager.Web.Models;
+using VeloEventsManager.Data;
+using VeloEventsManager.Models;
 
 namespace VeloEventsManager.Web.Account
 {
@@ -37,7 +38,7 @@ namespace VeloEventsManager.Web.Account
                 switch (result)
                 {
                     case SignInStatus.Success:
-                        IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                        Response.Redirect("~/");
                         break;
                     case SignInStatus.Failure:
                     default:

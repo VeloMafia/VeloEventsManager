@@ -6,8 +6,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using VeloEventsManager.Web.Models;
-using VeloEventsManager.Web.Data;
+using VeloEventsManager.Models;
+using VeloEventsManager.Data;
 
 namespace VeloEventsManager.Web
 {

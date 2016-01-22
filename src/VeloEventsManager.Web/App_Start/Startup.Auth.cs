@@ -6,8 +6,8 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.DataProtection;
 using Owin;
-using VeloEventsManager.Web.Models;
-using VeloEventsManager.Web.Data;
+using VeloEventsManager.Data;
+using VeloEventsManager.Models;
 
 namespace VeloEventsManager.Web
 {
