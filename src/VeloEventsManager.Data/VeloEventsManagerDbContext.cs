@@ -33,16 +33,33 @@
         {
             modelBuilder.Entity<User>()
                         .HasMany(u => u.Events)
-                        .WithMany()
+                        .WithMany(e => e.Participants)
                         .Map(m =>
                         {
                             m.MapRightKey("EventId");
-                            m.MapLeftKey("UserId");
-                            m.ToTable("EventsUsers");
+                            m.MapLeftKey("ParticipantId");
+                            m.ToTable("EventsParticipants");
                         });
 
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            modelBuilder.Entity<EventDay>()
+                        .HasMany(u => u.OptionalRoutes)
+                        .WithMany(e => e.EventDays)
+                        .Map(m =>
+                        {
+                            m.MapRightKey("EventDayId");
+                            m.MapLeftKey("OptionalRouteId");
+                            m.ToTable("EventDaysOptionalRoutes");
+                        });
+
+            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            //modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+
+
+            //modelBuilder.Entity<User>().HasMany(c => c.Events).WithRequired(x => x.Creator).WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Route>().HasRequired(c => c.StartPoint).WithMany().WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<EventDay>().HasRequired(c => c.MainRoute).WithMany().WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);
         }

@@ -1,4 +1,7 @@
-﻿namespace VeloEventsManager.Models
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace VeloEventsManager.Models
 {
 	public class Route
 	{
@@ -12,11 +15,7 @@
 
 		public virtual Point EndPoint { get; set; }
 
-		public int EventDayId { get; set; }
-
-		public virtual EventDay EventDay { get; set; }
-
-		public double LengthInMeters { get; set; }
+        public double LengthInMeters { get; set; }
 
 		public double AscentInMeters { get; set; }
 
@@ -25,5 +24,7 @@
 		public double ExpectedDurationInHours { get; set; }
 
 		public double Difficulty { get; set; }
-	}
+
+        public virtual ICollection<EventDay> EventDays { get; set; }
+    }
 }

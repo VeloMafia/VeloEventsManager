@@ -1,9 +1,10 @@
 ﻿namespace VeloEventsManager.Models
 {
-	using System;
-	using System.Collections.Generic;
-
-	public class Event
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    public class Event
 	{
 		private ICollection<User> participants;
 		private ICollection<EventDay> eventDays;
@@ -24,17 +25,18 @@
 
 		public DateTime EndDate { get; set; }
 
-		public string CreatorId { get; set; }
+        [ForeignKey("Creator")]
+        public string CreatorId { get; set; }
 
-		public virtual User Creator { get; set; }
+        public virtual User Creator { get; set; }
 
-		public virtual ICollection<User> Participants
-		{
-			get { return this.participants; }
-			set { this.participants = value; }
-		}
+        public virtual ICollection<User> Participants
+        {
+            get { return this.participants; }
+            set { this.participants = value; }
+        }
 
-		public virtual ICollection<EventDay> EventDays
+        public virtual ICollection<EventDay> EventDays
 		{
 			get { return this.eventDays; }
 			set { this.eventDays = value; }
