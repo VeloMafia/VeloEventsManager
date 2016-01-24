@@ -11,6 +11,8 @@ Teamwork project for Telerik Academy
     - **My events** - Displays all events for the current user
     - **All events** - Displays all available events for the current user. Admins can edit them.
     - **Add event** - Create new event. Only admins.
+    - **Event Details** - Detail information for the event.
+    	GEORGI
 
 - **Users**
     - **All Users** - Lists all users details. Admins can edit them.
