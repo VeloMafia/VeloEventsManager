@@ -16,7 +16,7 @@ namespace VeloEventsManager.Web.Account
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
-            var user = new User() { UserName = Username.Text, Email = Email.Text };
+            var user = new User() { UserName = Username.Text };
             IdentityResult result = manager.Create(user, Password.Text);
             if (result.Succeeded)
             {

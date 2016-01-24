@@ -32,7 +32,6 @@
                             itemid="<%# Item.Id %>"
                             onserverclick="ListViewUsers_ServerClick">
                             <%#: Item.UserName %></a>
-                        <br />
                         <asp:Button ID="ButtonDelete" runat="server"
                             CommandName="Delete"
                             Text="Delete"
