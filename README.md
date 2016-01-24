@@ -1,6 +1,23 @@
 # VeloEventsManager
 Teamwork project for Telerik Academy
 
+### Site pages
+
+- **Statistics**
+    - **Home** - Statistics about created events, total galleries etc.
+    - **Calendar** - Calendar with events (could be custom user control).
+
+- **Events**
+    - **My events** - Displays all events for the current user
+    - **All events** - Displays all available events for the current user. Admins can edit them.
+    - **Add event** - Create new event. Only admins.
+
+- **Users**
+    - **All Users** - Lists all users details. Admins can edit them.
+        TODOR
+    - **My Profile** - Current user profile. Can be edited.
+        TODOR
+
 ## Requirements
 
 ### Database
@@ -65,21 +82,6 @@ Teamwork project for Telerik Academy
     - name
     - date
     - location (url, saved on local disk or saved in db)
-
-### Site pages
-
-- **Statistics**
-    - **Home** - Statistics about created events, total galleries etc.
-    - **Calendar** - Calendar with events (could be custom user control).
-
-- **Events**
-    - **My events** - Displays all events for the current user
-    - **All events** - Displays all available events for the current user. Admins can edit them.
-    - **Add event** - Create new event. Only admins.
-
-- **Users**
-    - **All Users** - Lists all users details. Admins can edit them.
-    - **My Profile** - Current user profile. Can be edited.
 
 ### Site map (Navigator)
 - Home
