@@ -27,9 +27,9 @@
 
 		public double EnduranceIndex { get; set; }
 
-		public IEnumerable<string> Languages { get; set; }
+		public IList<string> Languages { get; set; }
 
-		public IEnumerable<string> Skills { get; set; }
+		public IList<string> Skills { get; set; }
 
 		public virtual ICollection<Event> Events
 		{

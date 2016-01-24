@@ -72,6 +72,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VeloEventsManager.Common\VeloEventsManager.Common.csproj">
+      <Project>{3a33a982-4f4b-47b7-9428-8b74bbe1ed18}</Project>
+      <Name>VeloEventsManager.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VeloEventsManager.Models\VeloEventsManager.Models.csproj">
       <Project>{9b6c643f-25d1-41a5-82f3-c5cacfff9e5e}</Project>
       <Name>VeloEventsManager.Models</Name>

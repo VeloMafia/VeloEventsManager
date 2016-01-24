@@ -28,7 +28,6 @@
 									<h4 class="list-group-item-heading"><%# Item.Date.ToString("d-MMM-yyyy") %></h4>
 									<p class="list-group-item-text"><%# Item.Description %></p>
 									<p class="list-group-item-text">Time: <%# Item.StartTime.ToString("hh:mm") %> - <%# Item.EndTime.ToString("hh:mm") %></p>
-									<%--NullReferenceException--%>
 									<p class="list-group-item-heading">Total distance: <%# Item.MainRoute.LengthInMeters %> km.</p>
 								</a>
 							</div>

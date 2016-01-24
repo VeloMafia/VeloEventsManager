@@ -5,11 +5,11 @@
     using System.ComponentModel.DataAnnotations.Schema;
     public class EventDay
 	{
-		private ICollection<Route> routes;
+		private ICollection<Route> optionalRoutes;
 
 		public EventDay()
 		{
-			this.routes = new HashSet<Route>();
+			this.optionalRoutes = new HashSet<Route>();
 		}
 
 		public int Id { get; set; }
@@ -24,7 +24,7 @@
 
         public int MainRouteId { get; set; }
 
-        public Route MainRoute { get; set; }
+        public virtual Route MainRoute { get; set; }
 
 		public int EventId { get; set; }
 
@@ -32,8 +32,8 @@
 
 		public virtual ICollection<Route> OptionalRoutes
         {
-			get { return this.routes; }
-			set { this.routes = value; }
+			get { return this.optionalRoutes; }
+			set { this.optionalRoutes = value; }
 		}
 	}
 }

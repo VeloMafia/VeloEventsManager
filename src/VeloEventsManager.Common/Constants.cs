@@ -1,8 +1,11 @@
 ﻿namespace VeloEventsManager.Common
 {
-	public class Constants
+	public static class Constants
 	{
-		public readonly string[] Skills = { "None", "Mechanic", "Medic", "Orientation", "Other" };
-		public readonly string[] Languages = { "None", "English", "Spanish", "German", "French", "Other" };
+		private static string[] languages = new string[] { "None", "English", "Spanish", "German", "French", "Other" };
+		private static string[] skills = { "None", "Mechanic", "Medic", "Orientation", "Other" };
+
+		public static string[] Languages { get { return languages; } }
+		public static string[] Skills { get { return skills; } }
 	}
 }

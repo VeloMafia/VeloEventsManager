@@ -35,32 +35,6 @@ namespace VeloEventsManager.Web.Events
 				Response.Redirect("~/");
 			}
 
-			var d1 = DateTime.Now.AddDays(1);
-			tripEvent.EventDays.Add(new EventDay()
-			{
-				Description = "purvi den alalala silajs hald sfhl sdlsj djsld hskld sjkdjs dlkshd kslhd sklfh skflh sklh sfklsh flks fsh fsfkl ",
-				Date = d1,
-				StartTime = d1.AddHours(3),
-				EndTime = d1.AddHours(10),
-				MainRoute = new Route()
-				{
-					LengthInMeters = 80,
-				}
-			});
-
-			var d2 = DateTime.Now.AddDays(2);
-			tripEvent.EventDays.Add(new EventDay()
-			{
-				Description = "vtori den",
-				Date = d2,
-				StartTime = d2.AddHours(3),
-				EndTime = d2.AddHours(10),
-				MainRoute = new Route()
-				{
-					LengthInMeters = 100,
-				}
-			});
-
 			return tripEvent;
 		}
 	}
