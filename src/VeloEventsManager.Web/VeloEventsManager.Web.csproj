@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\ListUsers.aspx" />
+    <None Include="Account\Web.config" />
     <Content Include="Global.asax" />
     <Content Include="Events\Details.aspx" />
     <Content Include="packages.config" />
