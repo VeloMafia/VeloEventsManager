@@ -17,6 +17,7 @@ namespace VeloEventsManager.Web.Account
 
         private const int PageSize = 5;
 
+        // Page events
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -25,6 +26,14 @@ namespace VeloEventsManager.Web.Account
             }
         }
 
+        // Page helpers
+        private void DisplayMessage(string msg)
+        {
+            var master = this.Master as Site;
+            master.ShowSuccessMessage(msg);
+        }
+
+        // Users list
         public IQueryable<User> ListViewUsers_GetData()
         {
             var Users = data.Users.OrderBy(x => x.Id);
@@ -42,18 +51,6 @@ namespace VeloEventsManager.Web.Account
             return Users.Skip(PageSize * page).Take(PageSize);
         }
 
-        public List<User> FormViewUsers_GetData()
-        {
-            if (ViewState["selectedTodo"] == null)
-            {
-                return new List<User>();
-            }
-
-            var id = (string)ViewState["selectedTodo"];
-            var foundTodo = data.Users.Find(id);
-            return new List<User> { foundTodo };
-        }
-
         protected void ListViewUsers_ServerClick(object sender, EventArgs e)
         {
             var element = (HtmlControl)sender;
@@ -63,62 +60,7 @@ namespace VeloEventsManager.Web.Account
             this.FormViewUserDetails.DataBind();
         }
 
-        public void FormViewUserDetails_UpdateItem(string id)
-        {
-            User item = null;
-            item = data.Users.Find(id);
-            if (item == null)
-            {
-                ModelState.AddModelError("", String.Format("Item with id {0} was not found", id));
-                return;
-            }
-
-            TryUpdateModel(item);
-
-            if (ModelState.IsValid)
-            {
-                data.Entry(item).State = EntityState.Modified;
-                data.SaveChanges();
-                DisplayMessage("Item updated");
-            }
-        }
-
-        protected void AddNewButton_Click(object sender, EventArgs e)
-        {
-            this.FormViewUserDetails.ChangeMode(FormViewMode.Insert);
-        }
-
-        public void FormViewUserDetails_InsertItem()
-        {
-            var item = new User();
-            TryUpdateModel(item);
-
-            if (ModelState.IsValid)
-            {
-                data.SaveChanges();
-                DisplayMessage("Item added");
-                this.ListViewUsers.DataBind();
-            }
-        }
-
-        public void FormViewUserDetails_DeleteItem(int id)
-        {
-            var item = data.Users.Find(id);
-            data.Users.Remove(item);
-            data.SaveChanges();
-            DisplayMessage("Item deleted");
-            ViewState["selectedTodo"] = null;
-            this.ListViewUsers.DataBind();
-            this.FormViewUserDetails.DataBind();
-        }
-
-        private void DisplayMessage(string msg)
-        {
-            var master = this.Master as Site;
-            master.ShowSuccessMessage(msg);
-        }
-
-        protected void orderByDate_SelectedIndexChanged(object sender, EventArgs e)
+        protected void orderByName_SelectedIndexChanged(object sender, EventArgs e)
         {
             var dropDown = (DropDownList)sender;
             var selectedItem = dropDown.SelectedItem;
@@ -168,5 +110,50 @@ namespace VeloEventsManager.Web.Account
             ViewState["page"] = lastPage;
             this.ListViewUsers.DataBind();
         }
+
+        // User details
+        public List<User> FormViewUserDetails_GetData()
+        {
+            if (ViewState["selectedTodo"] == null)
+            {
+                return new List<User>();
+            }
+
+            var id = (string)ViewState["selectedTodo"];
+            var foundTodo = data.Users.Find(id);
+            return new List<User> { foundTodo };
+        }
+
+        public void FormViewUserDetails_UpdateItem(string id)
+        {
+            User item = null;
+            item = data.Users.Find(id);
+            if (item == null)
+            {
+                ModelState.AddModelError("", String.Format("Item with id {0} was not found", id));
+                return;
+            }
+
+            TryUpdateModel(item);
+
+            if (ModelState.IsValid)
+            {
+                data.Entry(item).State = EntityState.Modified;
+                data.SaveChanges();
+                DisplayMessage("Item updated");
+            }
+        }
+
+        public void FormViewUserDetails_DeleteItem(int id)
+        {
+            var item = data.Users.Find(id);
+            data.Users.Remove(item);
+            data.SaveChanges();
+            DisplayMessage("Item deleted");
+            ViewState["selectedTodo"] = null;
+            this.ListViewUsers.DataBind();
+            this.FormViewUserDetails.DataBind();
+        }
+
     }
 }

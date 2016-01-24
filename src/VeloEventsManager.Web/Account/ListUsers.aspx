@@ -5,7 +5,7 @@
     <h3>Users</h3>
     Sort Name:
     <asp:dropdownlist runat="server" id="orderByName"
-        onselectedindexchanged="orderByDate_SelectedIndexChanged"
+        onselectedindexchanged="orderByName_SelectedIndexChanged"
         autopostback="true">
         <asp:ListItem Selected="True" Text="none" Value="0" />
         <asp:ListItem Text="asc" Value="1" />
@@ -82,9 +82,8 @@
             <asp:formview runat="server" id="FormViewUserDetails"
                 itemtype="VeloEventsManager.Models.User"
                 datakeynames="Id"
-                selectmethod="FormViewUsers_GetData"
+                selectmethod="FormViewUserDetails_GetData"
                 updatemethod="FormViewUserDetails_UpdateItem"
-                insertmethod="FormViewUserDetails_InsertItem"
                 deletemethod="FormViewUserDetails_DeleteItem"
                 renderoutertable="false">
                 <EmptyDataTemplate>
