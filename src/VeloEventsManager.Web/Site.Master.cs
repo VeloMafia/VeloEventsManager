@@ -45,5 +45,17 @@ namespace VeloEventsManager.Web
 
             return false;
         }
+
+        public void ShowSuccessMessage(string message)
+        {
+            this.success.InnerText = message;
+            this.success.Attributes.Remove("hidden");
+        }
+
+        public void ShowErrorMessage(string message)
+        {
+            this.error.InnerText = message;
+            this.error.Attributes.Remove("hidden");
+        }
     }
 }

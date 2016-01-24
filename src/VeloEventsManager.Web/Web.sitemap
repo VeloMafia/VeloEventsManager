@@ -7,6 +7,6 @@
             <siteMapNode url="~/Events/MyEvents.aspx" title="My events"/>
             <siteMapNode url="~/Events/AddEvent.aspx"  title="Add event"/>
         </siteMapNode>
-        <siteMapNode url="~/Users/Users.aspx" description="All users" title="Users"/>
+        <siteMapNode url="~/Account/ListUsers.aspx" description="All users" title="Users"/>
     </siteMapNode>
 </siteMap>

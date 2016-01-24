@@ -57,6 +57,10 @@
         </div>
         <%--<asp:SiteMapPath ID="SiteMapPathBreadcrump" runat="server" />--%>
         <div class="container body-content">
+
+            <div class="alert alert-success" runat="server" id="success" hidden="hidden"></div>
+            <div class="alert alert-warning" runat="server" id="error" hidden="hidden"></div>
+
             <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
             <hr />
             <footer>
