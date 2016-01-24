@@ -5,8 +5,9 @@
 
 	public class Bike
 	{
-		[Key, ForeignKey("Owner")]
-		public string OwnerId { get; set; }
+        public int Id { get; set; }
+
+        public string OwnerId { get; set; }
 
 		public virtual User Owner { get; set; }
 

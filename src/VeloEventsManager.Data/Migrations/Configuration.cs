@@ -22,11 +22,18 @@ namespace VeloEventsManager.Data.Migrations
 
         protected override void Seed(VeloEventsManagerDbContext context)
         {
-			this.SeedUsers(context);
-			this.SeedBikes(context);
-			this.SeedPoints(context);
-			this.SeedRoutes(context);
-			this.SeedEvents(context);
+            this.SeedRoles(context);
+            context = new VeloEventsManagerDbContext();
+            this.SeedUsers(context);
+            context = new VeloEventsManagerDbContext();
+            this.SeedBikes(context);
+            context = new VeloEventsManagerDbContext();
+            this.SeedPoints(context);
+            context = new VeloEventsManagerDbContext();
+            this.SeedRoutes(context);
+            context = new VeloEventsManagerDbContext();
+            this.SeedEvents(context);
+            context = new VeloEventsManagerDbContext();
 			this.SeedEventDays(context);
 		}
 
@@ -149,11 +156,11 @@ namespace VeloEventsManager.Data.Migrations
 				return;
 			}
 
-			for (int i = 0; i < 10000; i++)
+			for (int i = 0; i < 1000; i++)
 			{
 				var point = new Point()
 				{
-					Elevation = i / 1000,
+					Elevation = i / 100,
 					Lattitude = 42 + i * 0.001,
 					Longitude = 23 + i * 0.001,
 				};
@@ -192,7 +199,18 @@ namespace VeloEventsManager.Data.Migrations
 			context.SaveChanges();
 		}
 
-		private void SeedUsers(VeloEventsManagerDbContext context)
+        private void SeedRoles(VeloEventsManagerDbContext context)
+        {
+            if (!context.AppRoles.Any())
+            {
+                context.AppRoles.Add(new AppRole("admin"));
+                context.AppRoles.Add(new AppRole("user"));
+                context.SaveChanges();
+            }
+
+        }
+
+        private void SeedUsers(VeloEventsManagerDbContext context)
 		{
 			if (context.Users.Any())
 			{
@@ -201,12 +219,16 @@ namespace VeloEventsManager.Data.Migrations
 
 			var admin = new User()
 			{
-				Email = "admin@admin.com",
-				UserName = "admin@admin.com",
-				PasswordHash = new PasswordHasher().HashPassword("admin")
-			};
+				UserName = "a",
+				PasswordHash = new PasswordHasher().HashPassword("1"),
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
 
-			context.Users.Add(admin);
+            var roles = context.AppRoles.ToList();
+
+            admin.AppRoles.Add(roles[0]);
+
+			context.Users.AddOrUpdate(admin);
 
 			var languages = VeloEventsManager.Common.Constants.Languages;
 			var skills = VeloEventsManager.Common.Constants.Skills;
@@ -215,18 +237,22 @@ namespace VeloEventsManager.Data.Migrations
 			{
 				var user = new User()
 				{
-					Email = $"test{i}@test.bg",
-					UserName = $"test{i}@test.bg",
-					PasswordHash = new PasswordHasher().HashPassword($"test{i}@test.bg")
-				};
+					Email = $"user{i}@test.bg",
+					UserName = $"u{i}",
+					PasswordHash = new PasswordHasher().HashPassword($"{1}"),
+                    SecurityStamp = Guid.NewGuid().ToString()
+                };
 
 				for (int j = 0; j < 2; j++)
 				{
 					var lang = languages[random.Next(0, languages.Length)];
 					var skill = skills[random.Next(0, skills.Length)];
+
 					user.Languages.Add(lang);
 					user.Skills.Add(skill);
 				}
+
+                user.AppRoles.Add(roles[1]);
 
 				context.Users.Add(user);
 			}

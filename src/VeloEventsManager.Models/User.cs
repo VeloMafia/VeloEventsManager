@@ -17,13 +17,15 @@
 			this.events = new HashSet<Event>();
 			this.Languages = new List<string>();
 			this.Skills = new List<string>();
-		}
+            this.Bikes = new HashSet<Bike>();
+            this.AppRoles = new HashSet<AppRole>();
+        }
 
-		public int BikeId { get; set; }
+		public virtual ICollection<Bike> Bikes { get; set; }
 
-		public virtual Bike Bike { get; set; }
+        public virtual ICollection<AppRole> AppRoles { get; set; }
 
-		public string Mobile { get; set; }
+        public string Mobile { get; set; }
 
 		public double EnduranceIndex { get; set; }
 

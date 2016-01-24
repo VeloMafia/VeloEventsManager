@@ -14,6 +14,8 @@
         {
         }
 
+        public virtual IDbSet<AppRole> AppRoles { get; set; }
+
         public virtual IDbSet<Event> Events { get; set; }
 
         public virtual IDbSet<Route> Routes { get; set; }
