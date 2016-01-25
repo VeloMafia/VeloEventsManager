@@ -62,6 +62,8 @@
 
             modelBuilder.Entity<EventDay>().HasRequired(c => c.MainRoute).WithMany().WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<User>().HasMany(c => c.Bikes).WithRequired(x => x.Owner).WillCascadeOnDelete(true);
+
             base.OnModelCreating(modelBuilder);
         }
     }

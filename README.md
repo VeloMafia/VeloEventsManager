@@ -17,8 +17,9 @@ Teamwork project for Telerik Academy
 - **Users**
     - **All Users** - Lists all users details. Admins can edit them.
         TODOR
-    - **My Profile** - Current user profile. Can be edited.
-        TODOR
+        
+- **Profile** - Current user profile. Can be edited.
+    TODOR
 
 ## Requirements
 
