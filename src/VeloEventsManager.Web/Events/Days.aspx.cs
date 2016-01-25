@@ -87,5 +87,11 @@ namespace VeloEventsManager.Web.Events
 			//ViewState["selectedTodo"] = null;
 			Response.Redirect($"~/Events/Details.aspx?id={eventId}");
 		}
+
+		// The id parameter name should match the DataKeyNames value set on the control
+		public void ListViewOptionalRoutes_DeleteItem(int id)
+		{
+
+		}
 	}
 }
