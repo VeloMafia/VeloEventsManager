@@ -62,6 +62,11 @@ namespace VeloEventsManager.Web
                 return true;
             }
 
+            if (menuText == "My Routes" && !isAuthenticated)
+            {
+                return true;
+            }
+
             if (menuText == "My events" && !isAuthenticated)
             {
                 return true;

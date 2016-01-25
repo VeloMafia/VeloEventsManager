@@ -7,7 +7,9 @@ namespace VeloEventsManager.Models
 	{
 		public int Id { get; set; }
 
-		public int StartPointId { get; set; }
+        public string Name { get; set; }
+
+        public int StartPointId { get; set; }
 
 		public virtual Point StartPoint { get; set; }
 
@@ -26,5 +28,9 @@ namespace VeloEventsManager.Models
 		public double Difficulty { get; set; }
 
         public virtual ICollection<EventDay> EventDays { get; set; }
+
+        public string UserId { get; set; }
+
+        public virtual User User { get; set; }
     }
 }

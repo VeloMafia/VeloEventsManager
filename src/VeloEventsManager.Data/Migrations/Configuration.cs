@@ -128,23 +128,45 @@ namespace VeloEventsManager.Data.Migrations
 			}
 
 			var points = context.Points.ToList();
-			random = new Random();
+            
+            random = new Random();
 			for (int i = 0; i < 100; i++)
 			{
 				var startPoint = points[random.Next(0, points.Count)];
 				var endPoint = points[random.Next(0, points.Count)];
 				var route = new Route()
 				{
+                    Name = $"route_{i}",
 					StartPoint = startPoint,
 					EndPoint = endPoint,
 					AscentInMeters = i + 1,
 					DescentInMeters = i + 1,
 					LengthInMeters = i + 1,
-					Difficulty = i + 1,
+					Difficulty = i + 1
 				};
 
 				context.Routes.Add(route);
 			}
+
+            context.SaveChanges();
+
+            var usersCount = context.Users.Count();
+            var routesCount = context.Routes.Count();
+            for (int i = 0; i < usersCount; i++)
+            {
+                var user = context.Users.OrderBy(x => x.Id).Skip(i).Take(1).First();
+                for (int j = 0; j < random.Next(1,5); j++)
+                {
+                    var randomIndex = random.Next(1, routesCount);
+                    var route = context.Routes.FirstOrDefault(x => x.Id == randomIndex);
+                    if (user.Routes.Contains(route) || route.User != null)
+                    {
+                        continue;
+                    }
+
+                    route.User = user;
+                }
+            }
 
 			context.SaveChanges();
 		}
