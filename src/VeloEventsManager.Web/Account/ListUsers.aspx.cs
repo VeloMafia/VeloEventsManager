@@ -17,24 +17,28 @@ namespace VeloEventsManager.Web.Account
 
         private const int PageSize = 5;
 
-        // Page events
+        // PAGE EVENTS
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 ViewState["page"] = 0;
+                this.FormViewUserDetails.Visible = false;
             }
         }
 
-        // Page helpers
+        // PAGE MESSAGES
+
         private void DisplayMessage(string msg)
         {
             var master = this.Master as Site;
             master.ShowSuccessMessage(msg);
         }
 
-        // Users list
-        public IQueryable<User> ListViewUsers_GetData()
+        // DATA
+
+        public IQueryable<User> GetData()
         {
             var Users = data.Users.OrderBy(x => x.Id);
             var dateOrder = (string)ViewState["orderByName"];
@@ -51,80 +55,7 @@ namespace VeloEventsManager.Web.Account
             return Users.Skip(PageSize * page).Take(PageSize);
         }
 
-        protected void ListViewUsers_ServerClick(object sender, EventArgs e)
-        {
-            var element = (HtmlControl)sender;
-            var id = element.Attributes["itemid"];
-            ViewState.Add("selectedTodo", id);
-            FormViewUserDetails.ChangeMode(FormViewMode.ReadOnly);
-            this.FormViewUserDetails.DataBind();
-        }
-
-        protected void orderByName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var dropDown = (DropDownList)sender;
-            var selectedItem = dropDown.SelectedItem;
-            ViewState.Add("orderByName", selectedItem.Text);
-            FirstPage_ServerClick(new { }, new EventArgs());
-            this.ListViewUsers.DataBind();
-        }
-
-        protected void NextPage_ServerClick(object sender, EventArgs e)
-        {
-            int page = (int)ViewState["page"];
-            if (page * PageSize < data.Users.Count() - PageSize)
-            {
-                ViewState["page"] = ++page;
-                this.ListViewUsers.DataBind();
-            }
-
-        }
-
-        protected void PrevPage_ServerClick(object sender, EventArgs e)
-        {
-            int page = (int)ViewState["page"];
-            if (page > 0)
-            {
-                ViewState["page"] = --page;
-                this.ListViewUsers.DataBind();
-            }
-        }
-
-        protected void FirstPage_ServerClick(object sender, EventArgs e)
-        {
-            ViewState["page"] = 0;
-            this.ListViewUsers.DataBind();
-
-        }
-
-        protected void LastPage_ServerClick(object sender, EventArgs e)
-        {
-            var totalCount = data.Users.Count();
-
-            var lastPage = totalCount / PageSize;
-            if (totalCount % PageSize == 0)
-            {
-                lastPage--;
-            }
-
-            ViewState["page"] = lastPage;
-            this.ListViewUsers.DataBind();
-        }
-
-        // User details
-        public List<User> FormViewUserDetails_GetData()
-        {
-            if (ViewState["selectedTodo"] == null)
-            {
-                return new List<User>();
-            }
-
-            var id = (string)ViewState["selectedTodo"];
-            var foundTodo = data.Users.Find(id);
-            return new List<User> { foundTodo };
-        }
-
-        public void FormViewUserDetails_UpdateItem(string id)
+        public void UpdateItem(string id)
         {
             User item = null;
             item = data.Users.Find(id);
@@ -141,19 +72,88 @@ namespace VeloEventsManager.Web.Account
                 data.Entry(item).State = EntityState.Modified;
                 data.SaveChanges();
                 DisplayMessage("Item updated");
+                this.DataBind();
             }
         }
 
-        public void FormViewUserDetails_DeleteItem(int id)
+        public void DeleteItem(string id)
         {
             var item = data.Users.Find(id);
             data.Users.Remove(item);
             data.SaveChanges();
             DisplayMessage("Item deleted");
-            ViewState["selectedTodo"] = null;
-            this.ListViewUsers.DataBind();
-            this.FormViewUserDetails.DataBind();
+            //ViewState["selectedTodo"] = null;
+            this.ListViewUsers.SelectedIndex = -1;
+            this.FormViewUserDetails.Visible = false;
+            this.DataBind();
         }
 
+        // USERS LIST
+
+        protected void orderByName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var dropDown = (DropDownList)sender;
+            var selectedItem = dropDown.SelectedItem;
+            ViewState.Add("orderByName", selectedItem.Text);
+            FirstPage_ServerClick(new { }, new EventArgs());
+            this.DataBind();
+        }
+
+        protected void ListViewUsers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.FormViewUserDetails.PageIndex = this.ListViewUsers.SelectedIndex;
+            this.FormViewUserDetails.Visible = true;
+        }
+
+        // PAGINATION
+
+        protected void NextPage_ServerClick(object sender, EventArgs e)
+        {
+            int page = (int)ViewState["page"];
+            if (page * PageSize < data.Users.Count() - PageSize)
+            {
+                ViewState["page"] = ++page;
+                this.ListViewUsers.SelectedIndex = -1;
+                this.FormViewUserDetails.Visible = false;
+                this.DataBind();
+            }
+
+        }
+
+        protected void PrevPage_ServerClick(object sender, EventArgs e)
+        {
+            int page = (int)ViewState["page"];
+            if (page > 0)
+            {
+                ViewState["page"] = --page;
+                this.ListViewUsers.SelectedIndex = -1;
+                this.FormViewUserDetails.Visible = false;
+                this.DataBind();
+            }
+        }
+
+        protected void FirstPage_ServerClick(object sender, EventArgs e)
+        {
+            ViewState["page"] = 0;
+            this.ListViewUsers.SelectedIndex = -1;
+            this.FormViewUserDetails.Visible = false;
+            this.DataBind();
+        }
+
+        protected void LastPage_ServerClick(object sender, EventArgs e)
+        {
+            var totalCount = data.Users.Count();
+
+            var lastPage = totalCount / PageSize;
+            if (totalCount % PageSize == 0)
+            {
+                lastPage--;
+            }
+
+            ViewState["page"] = lastPage;
+            this.ListViewUsers.SelectedIndex = -1;
+            this.FormViewUserDetails.Visible = false;
+            this.DataBind();
+        }
     }
 }

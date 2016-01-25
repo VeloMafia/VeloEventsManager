@@ -3,22 +3,25 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <h3>Users</h3>
+
     Sort Name:
-    <asp:dropdownlist runat="server" id="orderByName"
-        onselectedindexchanged="orderByName_SelectedIndexChanged"
-        autopostback="true">
+    <asp:DropDownList runat="server" ID="orderByName"
+        OnSelectedIndexChanged="orderByName_SelectedIndexChanged"
+        AutoPostBack="true">
         <asp:ListItem Selected="True" Text="none" Value="0" />
         <asp:ListItem Text="asc" Value="1" />
         <asp:ListItem Text="des" Value="2" />
-    </asp:dropdownlist>
+    </asp:DropDownList>
+
     <div class="row">
         <div class="col-md-6">
 
-            <asp:listview runat="server" id="ListViewUsers"
-                datakeynames="Id"
-                selectmethod="ListViewUsers_GetData"
-                itemtype="VeloEventsManager.Models.User"
-                deletemethod="FormViewUserDetails_DeleteItem">
+            <asp:ListView runat="server" ID="ListViewUsers"
+                DataKeyNames="Id"
+                SelectMethod="GetData"
+                ItemType="VeloEventsManager.Models.User"
+                DeleteMethod="DeleteItem"
+                OnSelectedIndexChanged="ListViewUsers_SelectedIndexChanged">
 
                 <LayoutTemplate>
                     <ul class="list-group">
@@ -28,23 +31,28 @@
 
                 <ItemTemplate>
                     <li class="list-group-item" runat="server" id="li1">
-                        <a href="#" runat="server"
-                            itemid="<%# Item.Id %>"
-                            onserverclick="ListViewUsers_ServerClick">
-                            <%#: Item.UserName %></a>
+                        <p>Username: <%#: Item.UserName %> Events count: <%#: Item.Events.Count() %></p>
                         <asp:Button ID="ButtonDelete" runat="server"
                             CommandName="Delete"
                             Text="Delete"
+                            CssClass="btn btn-danger" />
+                        <asp:Button Text="Select" runat="server"
+                            CommandName="Select"
                             CssClass="btn btn-default" />
-                        <button id="ButtonDetails" runat="server"
-                            onserverclick="ListViewUsers_ServerClick"
-                            itemid="<%# Item.Id %>"
-                            class="btn btn-default">
-                            Details</button>
                     </li>
                 </ItemTemplate>
 
-            </asp:listview>
+                <SelectedItemTemplate>
+                    <li class="list-group-item active" runat="server" id="li1">
+                        <p><%#: Item.UserName %></p>
+                        <asp:Button ID="ButtonDelete" runat="server"
+                            CommandName="Delete"
+                            Text="Delete"
+                            CssClass="btn btn-danger" />
+                    </li>
+                </SelectedItemTemplate>
+
+            </asp:ListView>
 
             <ul class="pagination">
                 <li>
@@ -78,43 +86,65 @@
 
         <div class="col-md-6">
 
-            <asp:formview runat="server" id="FormViewUserDetails"
-                itemtype="VeloEventsManager.Models.User"
-                datakeynames="Id"
-                selectmethod="FormViewUserDetails_GetData"
-                updatemethod="FormViewUserDetails_UpdateItem"
-                deletemethod="FormViewUserDetails_DeleteItem"
-                renderoutertable="false">
-                <EmptyDataTemplate>
-                    <div class="panel panel-primary">
-                        <div class="panel-body">
-                            Nothing selected
-                        </div>
-                    </div>
-                </EmptyDataTemplate>
+            <asp:FormView runat="server" ID="FormViewUserDetails"
+                ItemType="VeloEventsManager.Models.User"
+                DataKeyNames="Id"
+                SelectMethod="GetData"
+                UpdateMethod="UpdateItem"
+                DeleteMethod="DeleteItem"
+                RenderOuterTable="false">
+
                 <ItemTemplate>
                     <div class="panel panel-primary">
+
                         <div class="panel-heading">
                             <h3 class="panel-title"><%#: Item.UserName %> detias</h3>
                         </div>
+
                         <div class="panel-body">
                             <p>User email: <%#: Item.Email %></p>
+                            <p>
+                                User roles:
+                                <asp:Repeater runat="server" ID="RepeaterRoles"
+                                    DataSource="<%# Item.AppRoles.ToList() %>"
+                                    ItemType="VeloEventsManager.Models.AppRole">
+                                    <ItemTemplate>
+                                        <%#:Item.Name %>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </p>
+
+                            <p>
+                                Events:
+                                <asp:Repeater runat="server" ID="RepeaterEvents"
+                                    DataSource="<%# Item.Events.ToList() %>"
+                                    ItemType="VeloEventsManager.Models.Event">
+                                    <ItemTemplate>
+                                        <%#:Item.Name %>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </p>
+
                             <asp:Button ID="ButtonEdit" runat="server"
                                 CommandName="Edit"
                                 Text="Edit"
                                 CssClass="btn btn-default" />
-                            <asp:Button ID="Button1" runat="server"
+                            <asp:Button ID="ButtonDelete" runat="server"
                                 CommandName="Delete"
                                 Text="Delete"
                                 CssClass="btn btn-default" />
                         </div>
+
                     </div>
                 </ItemTemplate>
+
                 <EditItemTemplate>
                     <div class="panel panel-primary">
+
                         <div class="panel-heading">
                             <h3 class="panel-title"><%#: Item.UserName %> edit details</h3>
                         </div>
+
                         <div class="panel-body">
                             Edit mail:
                             <asp:TextBox runat="server" ID="editTitle"
@@ -123,9 +153,11 @@
                             <asp:Button ID="ButtonUpdate" runat="server" CommandName="Update" Text="Update" />
                             <asp:Button ID="ButtonCancel" runat="server" CommandName="Cancel" Text="Cancel" />
                         </div>
+
                     </div>
                 </EditItemTemplate>
-            </asp:formview>
+
+            </asp:FormView>
 
         </div>
     </div>
