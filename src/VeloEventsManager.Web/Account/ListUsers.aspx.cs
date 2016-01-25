@@ -16,24 +16,18 @@ namespace VeloEventsManager.Web.Account
         VeloEventsManagerDbContext data = new VeloEventsManagerDbContext();
 
         private const int PageSize = 5;
-
+        private Site master;
         // PAGE EVENTS
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            master = this.Master as Site;
+
             if (!IsPostBack)
             {
                 ViewState["page"] = 0;
                 this.FormViewUserDetails.Visible = false;
             }
-        }
-
-        // PAGE MESSAGES
-
-        private void DisplayMessage(string msg)
-        {
-            var master = this.Master as Site;
-            master.ShowSuccessMessage(msg);
         }
 
         // DATA
@@ -57,6 +51,12 @@ namespace VeloEventsManager.Web.Account
 
         public void UpdateItem(string id)
         {
+            if (!master.isAdmin)
+            {
+                master.ShowErrorMessage("Not authorized.");
+                return;
+            }
+
             User item = null;
             item = data.Users.Find(id);
             if (item == null)
@@ -71,17 +71,23 @@ namespace VeloEventsManager.Web.Account
             {
                 data.Entry(item).State = EntityState.Modified;
                 data.SaveChanges();
-                DisplayMessage("Item updated");
+                master.ShowSuccessMessage("Item updated");
                 this.DataBind();
             }
         }
 
         public void DeleteItem(string id)
         {
+            if (!master.isAdmin)
+            {
+                master.ShowErrorMessage("Not authorized.");
+                return;
+            }
+
             var item = data.Users.Find(id);
             data.Users.Remove(item);
             data.SaveChanges();
-            DisplayMessage("Item deleted");
+            master.ShowSuccessMessage("Item deleted");
             //ViewState["selectedTodo"] = null;
             this.ListViewUsers.SelectedIndex = -1;
             this.FormViewUserDetails.Visible = false;

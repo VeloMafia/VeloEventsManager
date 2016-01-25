@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Security.Principal;
 using System.Web;
-using System.Web.Security;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using VeloEventsManager.Data;
@@ -14,10 +9,25 @@ namespace VeloEventsManager.Web
 {
     public partial class Site : System.Web.UI.MasterPage
     {
-        VeloEventsManagerDbContext data = new VeloEventsManagerDbContext();
+        public bool isAuthenticated = false;
+        public bool isAdmin = false;
+        private VeloEventsManagerDbContext data = new VeloEventsManagerDbContext();
+
+        public void ShowSuccessMessage(string message)
+        {
+            this.success.InnerText = message;
+            this.success.Attributes.Remove("hidden");
+        }
+
+        public void ShowErrorMessage(string message)
+        {
+            this.error.InnerText = message;
+            this.error.Attributes.Remove("hidden");
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Authorize();
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
@@ -33,10 +43,9 @@ namespace VeloEventsManager.Web
             }
         }
 
-        private bool ShouldRemoveItem(string menuText)
+        private void Authorize()
         {
-            var isAuthenticated = Context.User.Identity.IsAuthenticated;
-            var isAdmin = false;
+            isAuthenticated = Context.User.Identity.IsAuthenticated;
 
             var userId = Context.User.Identity.GetUserId();
             var user = data.Users.Find(userId);
@@ -44,7 +53,10 @@ namespace VeloEventsManager.Web
             {
                 isAdmin = user.AppRoles.Any(x => x.Name == "admin");
             }
+        }
 
+        private bool ShouldRemoveItem(string menuText)
+        {
             if (menuText == "Users" && !isAuthenticated)
             {
                 return true;
@@ -55,24 +67,12 @@ namespace VeloEventsManager.Web
                 return true;
             }
 
-            if (menuText == "Add event" && !isAdmin )
+            if (menuText == "Add event" && !isAdmin)
             {
                 return true;
             }
 
             return false;
-        }
-
-        public void ShowSuccessMessage(string message)
-        {
-            this.success.InnerText = message;
-            this.success.Attributes.Remove("hidden");
-        }
-
-        public void ShowErrorMessage(string message)
-        {
-            this.error.InnerText = message;
-            this.error.Attributes.Remove("hidden");
         }
     }
 }
