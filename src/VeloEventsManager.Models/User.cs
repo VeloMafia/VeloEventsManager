@@ -19,6 +19,7 @@
 			this.Skills = new List<string>();
             this.Bikes = new HashSet<Bike>();
             this.AppRoles = new HashSet<AppRole>();
+            this.Routes = new HashSet<Route>();
         }
 
 		public virtual ICollection<Bike> Bikes { get; set; }
@@ -39,7 +40,9 @@
 			set { this.events = value; }
 		}
 
-		public ClaimsIdentity GenerateUserIdentity(UserManager<User> manager)
+        public virtual ICollection<Route> Routes { get; set; }
+
+        public ClaimsIdentity GenerateUserIdentity(UserManager<User> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = manager.CreateIdentity(this, DefaultAuthenticationTypes.ApplicationCookie);

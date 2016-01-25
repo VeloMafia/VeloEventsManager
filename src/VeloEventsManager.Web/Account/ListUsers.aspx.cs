@@ -14,9 +14,9 @@ namespace VeloEventsManager.Web.Account
     public partial class ListUsers : System.Web.UI.Page
     {
         VeloEventsManagerDbContext data = new VeloEventsManagerDbContext();
-
         private const int PageSize = 5;
         private Site master;
+
         // PAGE EVENTS
 
         protected void Page_Load(object sender, EventArgs e)
