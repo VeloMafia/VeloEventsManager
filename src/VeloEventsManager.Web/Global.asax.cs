@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Web.Routing;
 
 namespace VeloEventsManager.Web
 {
     public class Global : System.Web.HttpApplication
     {
         protected void Application_Start(object sender, EventArgs e)
-        {
-            DatabaseConfig.Initialize();
+		{
+			RouteConfig.RegisterRoutes(RouteTable.Routes);
+			DatabaseConfig.Initialize();
         }
 
         protected void Session_Start(object sender, EventArgs e)

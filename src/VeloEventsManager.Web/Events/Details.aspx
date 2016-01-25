@@ -24,7 +24,7 @@
 						</HeaderTemplate>
 						<ItemTemplate>
 							<div class="list-group">
-								<a href="<%# string.Format("/Days.aspx?id={0}", Item.Id) %>" class="list-group-item">
+								<a href="<%# string.Format("/Events/Days.aspx?id={0}", Item.Id) %>" class="list-group-item">
 									<h4 class="list-group-item-heading"><%# Item.Date.ToString("d-MMM-yyyy") %></h4>
 									<p class="list-group-item-text"><%# Item.Description %></p>
 									<p class="list-group-item-text">Time: <%# Item.StartTime.ToString("hh:mm") %> - <%# Item.EndTime.ToString("hh:mm") %></p>
