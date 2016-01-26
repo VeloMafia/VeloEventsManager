@@ -33,7 +33,7 @@
                     <li class="list-group-item" runat="server" id="li1">
                         <div class="row">
                             <div class="col-md-6">
-                                <img src="/Uploaded_Files/<%# Item.UserName %>.jpg"
+                                <img src="/Uploaded_Files/<%# Item.Avatar %>"
                                     class="img-thumbnail img-responsive" />
                                 <br />
                                 <asp:Button ID="ButtonDelete" runat="server"
@@ -58,7 +58,7 @@
                     <li class="list-group-item active" runat="server" id="li1">
                         <div class="row">
                             <div class="col-md-6">
-                                <img src="/Uploaded_Files/<%# Item.UserName %>.jpg"
+                                <img src="/Uploaded_Files/<%# Item.Avatar %>"
                                     class="img-thumbnail img-responsive" />
                                 <br />
                                 <asp:Button ID="ButtonDelete" runat="server"

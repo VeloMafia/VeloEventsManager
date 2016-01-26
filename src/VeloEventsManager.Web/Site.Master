@@ -44,7 +44,7 @@
                         </AnonymousTemplate>
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/" title="Manage your account">Hello, <%: Context.User.Identity.Name  %> !</a></li>
+                                <li><a runat="server" href="~/Account/Profile.aspx" title="Manage your account">Hello, <%: Context.User.Identity.Name  %> !</a></li>
                                 <li>
                                     <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>
@@ -62,13 +62,18 @@
             <div class="alert alert-warning" runat="server" id="error" hidden="hidden"></div>
 
             <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
-            <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
-            </footer>
+
         </div>
+
+        <hr />
+
+        <footer class="container-fluid text-center">
+            <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+        </footer>
     </form>
+
     <asp:SiteMapDataSource ID="SiteMapDataSource" runat="server" />
+
     <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
     <script>
         $(".dropdown-menu").parent().removeClass().addClass('dropdown');

@@ -120,6 +120,7 @@
   <ItemGroup>
     <Content Include="Account\ListUsers.aspx" />
     <None Include="Account\Web.config" />
+    <Content Include="Account\Profile.aspx" />
     <Content Include="Errors\404.aspx" />
     <Content Include="Events\Days.aspx" />
     <Content Include="Global.asax" />
@@ -158,6 +159,13 @@
     </Compile>
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>

@@ -18,13 +18,12 @@ namespace VeloEventsManager.Web.Account
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
 
-
             var user = new User() { UserName = Username.Text };
             if (FileUploadControl.HasFile)
             {
-                string fileExtension = Path.GetExtension(FileUploadControl.FileName);
-                FileUploadControl.SaveAs(Server.MapPath("~/Uploaded_Files/") + user.UserName + ".jpg");
-                user.HasAvatar = true;
+                string fileName = user.UserName + DateTime.Now.ToString("dd_MM_yyyy") + ".jpg";
+                FileUploadControl.SaveAs(Server.MapPath("~/Uploaded_Files/") + fileName);
+                user.Avatar = fileName;
             }
 
             IdentityResult result = manager.Create(user, Password.Text);

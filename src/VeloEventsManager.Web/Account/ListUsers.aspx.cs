@@ -77,9 +77,9 @@ namespace VeloEventsManager.Web.Account
 
                 if (fileUploadControl.HasFile)
                 {
-                    string fileExtension = Path.GetExtension(fileUploadControl.FileName);
-                    fileUploadControl.SaveAs(Server.MapPath("~/Uploaded_Files/") + user.UserName + ".jpg");
-                    user.HasAvatar = true;
+                    string fileName = user.UserName + DateTime.Now.ToString("dd_MM_yyyy") + ".jpg";
+                    fileUploadControl.SaveAs(Server.MapPath("~/Uploaded_Files/") + fileName);
+                    user.Avatar = fileName;
                 }
 
                 data.Entry(item).State = EntityState.Modified;
