@@ -63,12 +63,12 @@
                         <div class="panel-body">
 
                             Name:
-                            <asp:TextBox runat="server"
+                            <asp:TextBox runat="server" ID="tbNewRouteName"
                                 Text="<%#: BindItem.Name %>" />
                             <br />
 
                             Lenght:
-                            <asp:TextBox runat="server"
+                            <asp:TextBox runat="server" ID="tbNewRouteLength"
                                 Text="<%#: BindItem.LengthInMeters %>" />
                             <br />
 
