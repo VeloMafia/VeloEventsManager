@@ -31,24 +31,51 @@
 
                 <ItemTemplate>
                     <li class="list-group-item" runat="server" id="li1">
-                        <p>Username: <%#: Item.UserName %> Events count: <%#: Item.Events.Count() %></p>
-                        <asp:Button ID="ButtonDelete" runat="server"
-                            CommandName="Delete"
-                            Text="Delete"
-                            CssClass="btn btn-danger" />
-                        <asp:Button Text="Select" runat="server"
-                            CommandName="Select"
-                            CssClass="btn btn-default" />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="/Uploaded_Files/<%# Item.UserName %>.jpg"
+                                    class="img-thumbnail img-responsive" />
+                                <br />
+                                <asp:Button ID="ButtonDelete" runat="server"
+                                    CommandName="Delete"
+                                    Text="Delete"
+                                    CssClass="btn btn-danger" />
+                                <asp:Button Text="Select" runat="server"
+                                    CommandName="Select"
+                                    CssClass="btn btn-default" />
+                            </div>
+                            <div class="col-md-6">
+                                Username: <%#: Item.UserName %>
+                                <br />
+                                Events count: <%#: Item.Events.Count() %>
+                                <br />
+                            </div>
+                        </div>
                     </li>
                 </ItemTemplate>
 
                 <SelectedItemTemplate>
                     <li class="list-group-item active" runat="server" id="li1">
-                        <p><%#: Item.UserName %></p>
-                        <asp:Button ID="ButtonDelete" runat="server"
-                            CommandName="Delete"
-                            Text="Delete"
-                            CssClass="btn btn-danger" />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="/Uploaded_Files/<%# Item.UserName %>.jpg"
+                                    class="img-thumbnail img-responsive" />
+                                <br />
+                                <asp:Button ID="ButtonDelete" runat="server"
+                                    CommandName="Delete"
+                                    Text="Delete"
+                                    CssClass="btn btn-danger" />
+                                <asp:Button Text="Select" runat="server"
+                                    CommandName="Select"
+                                    CssClass="btn btn-default" />
+                            </div>
+                            <div class="col-md-6">
+                                Username: <%#: Item.UserName %>
+                                <br />
+                                Events count: <%#: Item.Events.Count() %>
+                                <br />
+                            </div>
+                        </div>
                     </li>
                 </SelectedItemTemplate>
 
@@ -146,10 +173,20 @@
                         </div>
 
                         <div class="panel-body">
-                            Edit mail:
-                            <asp:TextBox runat="server" ID="editTitle"
-                                Text="<%#: BindItem.Email %>" />
-                            <br />
+                            <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="Email" 
+                                    CssClass="col-md-2 control-label">Email:</asp:Label>
+                                <div class="col-md-10">
+                                    <asp:TextBox ID="Email" runat="server" Text="<%#: BindItem.Email %>"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="FileUploadControl"
+                                     CssClass="col-md-2 control-label">Upload avatar:</asp:Label>
+                                <div class="col-md-10">
+                                    <asp:FileUpload ID="FileUploadControl" runat="server" />
+                                </div>
+                            </div>
                             <asp:Button ID="ButtonUpdate" runat="server" CommandName="Update" Text="Update" />
                             <asp:Button ID="ButtonCancel" runat="server" CommandName="Cancel" Text="Cancel" />
                         </div>

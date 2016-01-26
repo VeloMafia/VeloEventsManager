@@ -8,6 +8,8 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using VeloEventsManager.Data;
 using VeloEventsManager.Models;
+using Microsoft.AspNet.Identity;
+using System.IO;
 
 namespace VeloEventsManager.Web.Account
 {
@@ -51,12 +53,13 @@ namespace VeloEventsManager.Web.Account
 
         public void UpdateItem(string id)
         {
-            if (!master.isAdmin)
+            if (!master.isAdmin && id != User.Identity.GetUserId())
             {
                 master.ShowErrorMessage("Not authorized.");
                 return;
             }
 
+            var user = data.Users.Find(id);
             User item = null;
             item = data.Users.Find(id);
             if (item == null)
@@ -69,9 +72,20 @@ namespace VeloEventsManager.Web.Account
 
             if (ModelState.IsValid)
             {
+
+                var fileUploadControl = (FileUpload)FormViewUserDetails.FindControl("FileUploadControl");
+
+                if (fileUploadControl.HasFile)
+                {
+                    string fileExtension = Path.GetExtension(fileUploadControl.FileName);
+                    fileUploadControl.SaveAs(Server.MapPath("~/Uploaded_Files/") + user.UserName + ".jpg");
+                    user.HasAvatar = true;
+                }
+
                 data.Entry(item).State = EntityState.Modified;
                 data.SaveChanges();
                 master.ShowSuccessMessage("Item updated");
+
                 this.DataBind();
             }
         }

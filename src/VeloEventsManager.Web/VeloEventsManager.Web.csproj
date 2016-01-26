@@ -134,6 +134,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="Routes\ListUserRoutes.aspx" />
+    <Content Include="Uploaded_Files\dummy.txt" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.sitemap" />
   </ItemGroup>

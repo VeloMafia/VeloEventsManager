@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -16,14 +17,24 @@ namespace VeloEventsManager.Web.Account
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
+
+
             var user = new User() { UserName = Username.Text };
+            if (FileUploadControl.HasFile)
+            {
+                string fileExtension = Path.GetExtension(FileUploadControl.FileName);
+                FileUploadControl.SaveAs(Server.MapPath("~/Uploaded_Files/") + user.UserName + ".jpg");
+                user.HasAvatar = true;
+            }
+
             IdentityResult result = manager.Create(user, Password.Text);
             if (result.Succeeded)
             {
-                signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
+
+                signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                 Response.Redirect("~/");
             }
-            else 
+            else
             {
                 ErrorMessage.Text = result.Errors.FirstOrDefault();
             }

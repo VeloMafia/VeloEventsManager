@@ -30,7 +30,9 @@
 
 		public double EnduranceIndex { get; set; }
 
-		public IList<string> Languages { get; set; }
+        public bool HasAvatar { get; set; }
+
+        public IList<string> Languages { get; set; }
 
 		public IList<string> Skills { get; set; }
 
