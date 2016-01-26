@@ -30,11 +30,11 @@ namespace VeloEventsManager.Web.Routes
         public void GridViewRoutes_DeleteItem(int id)
         {
             var item = data.Routes.Find(id);
-            var eventsIds = data.EventDays.Where(x => x.MainRouteId == item.Id).Select(x => x.EventId).ToList();
-            var eventNames = data.Events.Where(x => eventsIds.Contains(x.Id)).Select(x => x.Name).ToArray();
-            if (eventNames.Length > 0)
+            var dependentEventsIds = data.EventDays.Where(x => x.MainRouteId == item.Id).Select(x => x.EventId).ToList();
+            var dependentEventNames = data.Events.Where(x => dependentEventsIds.Contains(x.Id)).Select(x => x.Name).ToArray();
+            if (dependentEventNames.Length > 0)
             {
-                string eventNamesString = string.Join(", ", eventNames);
+                string eventNamesString = string.Join(", ", dependentEventNames);
                 master.ShowErrorMessage($"Route cannot be deleted because it is main route in event {eventNamesString}");
                 return;
             }
@@ -45,7 +45,6 @@ namespace VeloEventsManager.Web.Routes
             this.DataBind();
         }
 
-        // The id parameter name should match the DataKeyNames value set on the control
         public void GridViewRoutes_UpdateItem(int id)
         {
             Route item = null;
@@ -65,6 +64,16 @@ namespace VeloEventsManager.Web.Routes
                 master.ShowSuccessMessage("Item updated");
                 this.DataBind();
             }
+        }
+
+        protected void btnCreate_Click(object sender, EventArgs e)
+        {
+            this.fvCreateRoute.Visible = true;
+        }
+
+        public void fvCreateRoute_InsertItem()
+        {
+
         }
     }
 }

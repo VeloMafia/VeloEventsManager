@@ -13,6 +13,15 @@ namespace VeloEventsManager.Web.Routes {
     public partial class ListRoutes {
         
         /// <summary>
+        /// btnCreate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCreate;
+        
+        /// <summary>
         /// GridViewRoutes control.
         /// </summary>
         /// <remarks>
@@ -20,5 +29,14 @@ namespace VeloEventsManager.Web.Routes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewRoutes;
+        
+        /// <summary>
+        /// fvCreateRoute control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FormView fvCreateRoute;
     }
 }
