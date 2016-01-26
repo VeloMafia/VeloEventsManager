@@ -59,7 +59,7 @@ namespace VeloEventsManager.Web.Account
 
                 if (fileUploadControl.HasFile)
                 {
-                    string fileName =  user.UserName + DateTime.Now.ToString("dd_MM_yyyy") + ".jpg";
+                    string fileName =  user.UserName + DateTime.Now.ToString("dd_MM_yyyy_hh_mm_ss") + ".jpg";
                     fileUploadControl.SaveAs(Server.MapPath("~/Uploaded_Files/") + fileName);
                     user.Avatar = fileName;
                 }
