@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using VeloEventsManager.Data;
 using VeloEventsManager.Models;
+using VeloEventsManager.Web.Controls;
 
 namespace VeloEventsManager.Web.Events
 {
@@ -36,6 +38,32 @@ namespace VeloEventsManager.Web.Events
 			}
 
 			return tripEvent;
+		}
+
+		protected void JoinControl_Join(object sender, JoinEventArgs e)
+		{
+			string userID = this.User.Identity.GetUserId();
+			User user = this.dbContext.Users.FirstOrDefault(x => x.Id == userID);
+			Event trip = this.dbContext.Events.FirstOrDefault(x => x.Id == e.DataID);
+
+			if (e.IsJoin)
+			{
+				trip.Participants.Add(user);
+			}
+			else
+			{
+				trip.Participants.Remove(user);
+			}
+			this.dbContext.SaveChanges();
+		}
+
+		protected bool IsJoin(Event item)
+		{
+			string userID = User.Identity.GetUserId();
+			User user = this.dbContext.Users.FirstOrDefault(x => x.Id == userID);
+
+			var isJoin = user.Events.Any(x => x == item);
+			return isJoin;
 		}
 	}
 }

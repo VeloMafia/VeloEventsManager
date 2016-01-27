@@ -121,6 +121,7 @@
     <Content Include="Account\ListUsers.aspx" />
     <None Include="Account\Web.config" />
     <Content Include="Account\Profile.aspx" />
+    <Content Include="Controls\JoinControl.ascx" />
     <Content Include="Errors\404.aspx" />
     <Content Include="Events\Days.aspx" />
     <Content Include="Global.asax" />
@@ -177,6 +178,12 @@
     <Compile Include="App_Start\DatabaseConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controls\JoinControl.ascx.cs">
+      <DependentUpon>JoinControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\JoinControl.ascx.designer.cs">
+      <DependentUpon>JoinControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

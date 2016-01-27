@@ -1,10 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Details.aspx.cs" Inherits="VeloEventsManager.Web.Events.Details" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
+
+<%@ Register Src="~/Controls/JoinControl.ascx" TagPrefix="uc" TagName="JoinControl" %>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 	<asp:FormView runat="server" ID="FormViewEventDetails" ItemType="VeloEventsManager.Models.Event" SelectMethod="FormViewEventDetails_GetItem">
 		<ItemTemplate>
 			<div class="jumbotron">
+				<uc:JoinControl  runat="server" ID="JoinControl"
+					IsJoin="<%# IsJoin(Item) %>"
+					DataID="<%# Item.Id %>"
+					OnJoin="JoinControl_Join" />
 				<h1><%#: Item.Name %></h1>
 				<div>From: <%#: Item.StartDate.Date.ToString("d-MMM-yyyy") %> To: <%#: Item.EndDate.Date.ToString("d-MMM-yyyy") %></div>
 				<p>Description: <%#: Item.Description %></p>
