@@ -130,6 +130,7 @@
     <Content Include="Errors\404.aspx" />
     <Content Include="Events\Days.aspx" />
     <Content Include="Events\Events.aspx" />
+    <Content Include="Events\MyEvents.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Events\Details.aspx" />
     <Content Include="packages.config" />
@@ -217,6 +218,13 @@
     </Compile>
     <Compile Include="Events\Events.aspx.designer.cs">
       <DependentUpon>Events.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Events\MyEvents.aspx.cs">
+      <DependentUpon>MyEvents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Events\MyEvents.aspx.designer.cs">
+      <DependentUpon>MyEvents.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
