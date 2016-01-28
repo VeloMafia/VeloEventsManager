@@ -128,6 +128,7 @@
     <Content Include="Content\ButtonsSort.css" />
     <Content Include="Controls\JoinControl.ascx" />
     <Content Include="Errors\404.aspx" />
+    <Content Include="Events\AddEvent.aspx" />
     <Content Include="Events\Days.aspx" />
     <Content Include="Events\Events.aspx" />
     <Content Include="Events\MyEvents.aspx" />
@@ -204,6 +205,13 @@
     </Compile>
     <Compile Include="Errors\404.aspx.designer.cs">
       <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Events\AddEvent.aspx.cs">
+      <DependentUpon>AddEvent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Events\AddEvent.aspx.designer.cs">
+      <DependentUpon>AddEvent.aspx</DependentUpon>
     </Compile>
     <Compile Include="Events\Days.aspx.cs">
       <DependentUpon>Days.aspx</DependentUpon>
